@@ -3,33 +3,13 @@
 
 # Python generated files
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+
 
 # Docker volumes that might contain generated data
 /data/
 
 # Program outputs
-*.log
-*.csv
-*.json
+
 /output/
 /models/
 /results/
@@ -41,3 +21,5 @@ catboost_info/learn_error.tsv
 catboost_info/time_left.tsv
 catboost_info/learn/events.out.tfevents
 notebooks/car_recommendation_system.ipynb
+notebooks/car_recommendation.log
+catboost_info/catboost_training.json
