@@ -32,6 +32,23 @@ services:
     environment:
       - MLFLOW_TRACKING_URI=http://mlflow:5000
     command: python main.py --optimize --register_model
+    
+  # Model registration service
+  model-registration:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: car-recommendation-registration
+    volumes:
+      - ./:/app
+      - ./mlruns:/mlruns
+    depends_on:
+      - training
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+    command: python register_model.py
+    profiles:
+      - post-training
 
   # FastAPI service
   api:
