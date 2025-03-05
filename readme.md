@@ -5,7 +5,7 @@ This project implements a complete solution for:
 - Model training, tracking, and deployment using MLflow
 - API serving using FastAPI
 
-## Architectur
+## Architecture
 
 The system consists of the following components:
 - **Data Processing**: Cleaning and preprocessing car data
@@ -21,7 +21,7 @@ The system trains and compares the following models:
 - LightGBM Regressor
 - CatBoost Regressor
 
-Models are evaluated based on RMSE, MAE, and R² metrics. The best model is selected for deployment.
+Models are evaluated based on RMSE, MAE, and R² metrics. The best model is selected for deployment by given metric.
 
 ### Prerequisites
 - Docker and Docker Compose
