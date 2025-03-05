@@ -385,23 +385,25 @@ def find_best_model(results):
             best_model_name = model_name
     
     return best_model_name, results[best_model_name]
-
+"""
 def register_best_model(model, model_name="car-recommendation-model"):
-    """
-    Register the best model to MLflow Model Registry.
-    
-    Parameters:
-    -----------
-    model : sklearn.pipeline.Pipeline
-        Best model pipeline
-    model_name : str, optional
-        Name for the registered model
-    
-    Returns:
-    --------
-    mlflow.entities.model_registry.ModelVersion
-        Registered model version
-    """
+"""
+"""
+Register the best model to MLflow Model Registry.
+
+Parameters:
+-----------
+model : sklearn.pipeline.Pipeline
+    Best model pipeline
+model_name : str, optional
+    Name for the registered model
+
+Returns:
+--------
+mlflow.entities.model_registry.ModelVersion
+    Registered model version
+"""
+"""
     with mlflow.start_run():
         model_uri = mlflow.sklearn.log_model(model, "model")
         model_version = mlflow.register_model(model_uri, model_name)
@@ -409,7 +411,7 @@ def register_best_model(model, model_name="car-recommendation-model"):
         logger.info(f"Model registered as '{model_name}' with version {model_version.version}")
         
         return model_version
-
+"""
 
 def set_mlflow_tracking_uri():
     """Set the MLflow tracking URI to the local server"""
@@ -419,7 +421,7 @@ def set_mlflow_tracking_uri():
 def find_best_run_and_register(
     experiment_names=None,
     experiment_ids=None,
-    metric_name="accuracy",
+    metric_name="test_mse",
     higher_is_better=True,
     model_name="best_model",
     tags=None,

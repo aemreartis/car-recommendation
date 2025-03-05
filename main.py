@@ -13,7 +13,7 @@ from mlflow.tracking import MlflowClient
 from src.config import MLFLOW_TRACKING_URI, MLFLOW_EXPERIMENT_NAME, TARGET_COLUMN
 from src.data.data_processing import load_data, preprocess_data, split_data, save_processed_data
 from src.features.feature_engineering import prepare_features_targets
-from src.models.train_model import compare_models, find_best_model, register_best_model,find_best_run_and_register
+from src.models.train_model import compare_models, find_best_model,find_best_run_and_register
 
 # Configure logging
 logging.basicConfig(
@@ -92,7 +92,8 @@ def main():
         optimize=args.optimize, n_trials=args.trials
     )
 
-
+   
+"""
     # Step 5: Find best model
     
     try:
@@ -122,8 +123,7 @@ def main():
         model_name="best_overall_model",
         description="Best model across all experiments"
     )
-    
-    """
+ 
     # Step 5: Find best model
     logger.info("Step 5: Finding the best model")
     best_model_name, best_model_results = find_best_model(results)
