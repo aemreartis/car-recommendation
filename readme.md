@@ -37,16 +37,25 @@ Models are evaluated based on RMSE, MAE, and R² metrics. The best model is sele
 
 ### Running the Project
 
-#### Using Docker 
+#### DEMO
 
-1. Start MLFlow, FastAPI and Train services:
-   ```bash
-   docker-compose up
-   ```
-2. Register best model by given metric:
-   ```bash
-   docker compose --profile post-training up -d 
-   ```
+# Step 1: Start MLflow and run training
+docker-compose up --build
+
+## Check model version
+curl -X 'GET' \
+  'http://localhost:8000/model-info' \
+  -H 'accept: application/json'
+
+
+# Step 2: Register v2 model
+docker-compose run --no-deps --rm model-registration
+
+## Check model version
+curl -X 'GET' \
+  'http://localhost:8000/model-info' \
+  -H 'accept: application/json'
+
   
 4. Access the services:
    - MLflow UI: http://localhost:5000
@@ -103,5 +112,6 @@ curl -X 'POST' \
 ```
 ### Future Work
 -Data scrapping, data versioning and auto train pipeline
+-Docker-compose improvement for 
 -Improve MLFlow logging
 -Model based recommendation (currently runs statisticaly based on price, year and mileage data)
