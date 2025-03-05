@@ -31,7 +31,7 @@ Models are evaluated based on RMSE, MAE, and R² metrics. The best model is sele
 1. Clone the repository:
    ```bash
    git clone https://github.com/aemreartis/car-recommendation.git
-   cd car-recommendation-system
+   cd car-recommendation
    ```
 
 ## DEMO
@@ -117,4 +117,4 @@ curl -X 'POST' \
 -Data scrapping, data versioning and auto train pipeline  <br> 
 -Docker-compose improvement for better sync <br> 
 -Improve MLFlow logging <br> 
--Model based recommendation (Price prediction runs on model but recommendation currently runs statisticaly based on price, year and mileage data) <br> 
+-Model based recommendation and algorithms improovement (Price prediction runs on model but recommendation currently runs statisticaly based on price, year and mileage data) <br> 
