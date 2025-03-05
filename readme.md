@@ -101,3 +101,7 @@ curl -X 'POST' \
   "min_year": 2010
 }'
 ```
+### Future Work
+-Data scrapping, data versioning and auto train pipeline
+-Improve MLFlow logging
+-Model based recommendation (currently runs statisticaly based on price, year and mileage data)
