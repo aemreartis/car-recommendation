@@ -25,7 +25,6 @@ Models are evaluated based on RMSE, MAE, and R² metrics. The best model is sele
 
 ### Prerequisites
 - Docker and Docker Compose
-- Python 3.8+
 
 ### Installation
 
@@ -116,6 +115,6 @@ curl -X 'POST' \
 ```
 ### Future Work
 -Data scrapping, data versioning and auto train pipeline  <br> 
--Docker-compose improvement for  <br> 
+-Docker-compose improvement for better sync <br> 
 -Improve MLFlow logging <br> 
--Model based recommendation (currently runs statisticaly based on price, year and mileage data) <br> 
+-Model based recommendation (Price prediction runs on model but recommendation currently runs statisticaly based on price, year and mileage data) <br> 
