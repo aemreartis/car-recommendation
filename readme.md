@@ -1,18 +1,11 @@
-# Car Recommendation System
-
-An end-to-end machine learning pipeline for car price prediction and recommendation using MLflow and FastAPI.
-
 ## Project Overview
-
 This project implements a complete solution for:
 - Car price prediction based on features
 - Personalized car recommendations based on user preferences
 - Model training, tracking, and deployment using MLflow
 - API serving using FastAPI
 
-## Architecture
-
-![Architecture Diagram](architecture.png)
+## Architectur
 
 The system consists of the following components:
 - **Data Processing**: Cleaning and preprocessing car data
@@ -22,7 +15,6 @@ The system consists of the following components:
 - **FastAPI Service**: Serving predictions and recommendations via REST API
 
 ## Models
-
 The system trains and compares the following models:
 - Random Forest Regressor
 - XGBoost Regressor
@@ -31,35 +23,7 @@ The system trains and compares the following models:
 
 Models are evaluated based on RMSE, MAE, and R² metrics. The best model is selected for deployment.
 
-## Project Structure
-
-```
-car_recommendation/
-├── api/                   # FastAPI application
-│   ├── main.py            # API endpoints
-│   ├── schema.py          # Pydantic models
-│   └── service.py         # Service layer
-├── data/                  # Data files
-│   ├── raw/               # Original data
-│   └── processed/         # Processed data
-├── mlruns/                # MLflow experiment tracking
-├── models/                # Saved models
-├── src/                   # Source code
-│   ├── data/              # Data processing
-│   ├── features/          # Feature engineering
-│   ├── models/            # Model training and prediction
-│   ├── utils/             # Utility functions
-│   └── config.py          # Configuration
-├── Dockerfile             # Dockerfile for containerization
-├── docker-compose.yml     # Docker Compose configuration
-├── main.py                # Main entry point
-└── requirements.txt       # Python dependencies
-```
-
-## Getting Started
-
 ### Prerequisites
-
 - Docker and Docker Compose
 - Python 3.8+
 
@@ -67,48 +31,26 @@ car_recommendation/
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/aemreartis/car-recommendation.git
    cd car-recommendation-system
-   ```
-
-2. Set up the environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
    ```
 
 ### Running the Project
 
-#### Using Docker (Recommended)
+#### Using Docker 
 
-1. Start all services:
+1. Start MLFlow, FastAPI and Train services:
    ```bash
    docker-compose up
    ```
-
-2. Access the services:
+2. Register best model by given metric:
+   ```bash
+   docker compose --profile post-training up -d 
+   ```
+  
+4. Access the services:
    - MLflow UI: http://localhost:5000
    - FastAPI Swagger UI: http://localhost:8000/docs
-
-#### Manual Setup
-
-1. Start MLflow server:
-   ```bash
-   mlflow server --host 0.0.0.0 --port 5000
-   ```
-
-2. Train the model:
-   ```bash
-   python main.py --optimize --register_model
-   ```
-
-3. Start the FastAPI service:
-   ```bash
-   uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
-   ```
-
-## Usage
 
 ### API Endpoints
 
@@ -159,47 +101,3 @@ curl -X 'POST' \
   "min_year": 2010
 }'
 ```
-
-## Model Training
-
-To train the model with different configurations:
-
-```bash
-# Basic training
-python main.py
-
-# With hyperparameter optimization
-python main.py --optimize
-
-# With hyperparameter optimization and a specific number of trials
-python main.py --optimize --trials 50
-
-# With hyperparameter optimization and model registration
-python main.py --optimize --register_model
-```
-
-## Customization
-
-### Adding New Features
-
-1. Update the feature definitions in `src/config.py`
-2. Implement the feature extraction in `src/features/feature_engineering.py`
-3. Retrain the model
-
-### Adding New Models
-
-1. Add the model configuration in `src/config.py`
-2. Update the training logic in `src/models/train_model.py`
-3. Retrain and compare with existing models
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit your changes (`git commit -m 'Add new feature'`)
-4. Push to the branch (`git push origin feature/new-feature`)
-5. Create a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
