@@ -35,23 +35,21 @@ Models are evaluated based on RMSE, MAE, and R² metrics. The best model is sele
    cd car-recommendation-system
    ```
 
-### Running the Project
+## DEMO
 
-#### DEMO
-
-# Step 1: Start MLflow and run training
+### Step 1: Start MLflow and run training
 docker-compose up --build
 
-## Check model version
+#### Check model version
 curl -X 'GET' \
   'http://localhost:8000/model-info' \
   -H 'accept: application/json'
 
 
-# Step 2: Register v2 model
+### Step 2: Register v2 model
 docker-compose run --no-deps --rm model-registration
 
-## Check model version
+#### Check model version
 curl -X 'GET' \
   'http://localhost:8000/model-info' \
   -H 'accept: application/json'
