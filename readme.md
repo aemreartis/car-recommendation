@@ -115,7 +115,7 @@ curl -X 'POST' \
 }'
 ```
 ### Future Work
--Data scrapping, data versioning and auto train pipeline
--Docker-compose improvement for 
--Improve MLFlow logging
--Model based recommendation (currently runs statisticaly based on price, year and mileage data)
+-Data scrapping, data versioning and auto train pipeline  <br> 
+-Docker-compose improvement for  <br> 
+-Improve MLFlow logging <br> 
+-Model based recommendation (currently runs statisticaly based on price, year and mileage data) <br> 
