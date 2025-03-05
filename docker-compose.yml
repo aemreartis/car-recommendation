@@ -1,5 +1,4 @@
 services:
-  # MLflow tracking server
   mlflow:
     image: python:3.9-slim
     container_name: mlflow-server
@@ -14,9 +13,12 @@ services:
       - ./mlruns:/mlruns
     environment:
       - MLFLOW_TRACKING_URI=http://localhost:5000
-    # Command is now included in the entrypoint
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-  # Model training service
   training:
     build:
       context: .
@@ -26,12 +28,15 @@ services:
       - ./:/app
       - ./mlruns:/mlruns
     depends_on:
-      - mlflow
+      mlflow:
+        condition: service_healthy
     environment:
       - MLFLOW_TRACKING_URI=http://mlflow:5000
-    command: python main.py --optimize --register_model
+    command: >
+      bash -c "
+        python main.py --optimize --register_model &&
+        touch /app/training_complete"
 
-  # Model registration service
   model-registration:
     build:
       context: .
@@ -41,14 +46,16 @@ services:
       - ./:/app
       - ./mlruns:/mlruns
     depends_on:
-      - training
+      training:
+        condition: service_completed_successfully
     environment:
       - MLFLOW_TRACKING_URI=http://mlflow:5000
-    command: python register_model.py
-    profiles:
-      - post-training
+    command: >
+      bash -c "
+        while [ ! -f /app/training_complete ]; do sleep 2; done &&
+        python register_model.py &&
+        touch /app/registration_complete"
 
-  # FastAPI service
   api:
     build:
       context: .
@@ -61,9 +68,13 @@ services:
       - ./:/app
       - ./mlruns:/mlruns
     depends_on:
-      - mlflow
+      model-registration:
+        condition: service_completed_successfully
     environment:
       - MLFLOW_TRACKING_URI=http://mlflow:5000
       - MODEL_NAME=best_overall_model
       - MODEL_STAGE=Production
-    command: uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+    command: >
+      bash -c "
+        while [ ! -f /app/registration_complete ]; do sleep 2; done &&
+        uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload"
